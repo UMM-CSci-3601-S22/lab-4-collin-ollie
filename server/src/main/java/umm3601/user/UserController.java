@@ -84,9 +84,12 @@ public class UserController {
    *
    * @param ctx a Javalin HTTP context
    */
-  public void getUsers(Context ctx) {
+  public void getUsers(Context ctx) {ate, audited 1417 packages in 11s
 
-    List<Bson> filters = new ArrayList<>(); // start with a blank document
+    149 packages are looking for funding
+      run `npm fund` for details
+
+    8 vulnerabilities (6 moderate, 2 high)
 
     if (ctx.queryParamMap().containsKey(AGE_KEY)) {
         int targetAge = ctx.queryParamAsClass(AGE_KEY, Integer.class).get();

@@ -12,6 +12,7 @@ import io.javalin.Javalin;
 import io.javalin.core.util.RouteOverviewPlugin;
 import io.javalin.http.InternalServerErrorResponse;
 import umm3601.user.UserController;
+import umm3601.todo.TodoController;
 
 public class Server {
 
@@ -25,8 +26,7 @@ public class Server {
     String databaseName = System.getenv().getOrDefault("MONGO_DB", "dev");
 
     // Setup the MongoDB client object with the information we set earlier
-    MongoClient mongoClient
-      = MongoClients.create(MongoClientSettings
+    MongoClient mongoClient = MongoClients.create(MongoClientSettings
         .builder()
         .applyToClusterSettings(builder -> builder.hosts(Arrays.asList(new ServerAddress(mongoAddr))))
         .build());
@@ -36,6 +36,7 @@ public class Server {
 
     // Initialize dependencies
     UserController userController = new UserController(database);
+    TodoController todoController = new TodoController(database);
 
     Javalin server = Javalin.create(config -> {
       config.registerPlugin(new RouteOverviewPlugin("/api"));
@@ -68,6 +69,16 @@ public class Server {
     // of the HTTP request
     server.post("/api/users", userController::addNewUser);
 
+    server.get("/api/users", todoController::getTodos);
+
+    // Get the specified todoUser
+
+    // Delete the specified todo
+    server.delete("/api/todos/{id}", todoController::deleteTodo);
+
+    // Add new todo with the todo info being in the JSON body
+    // of the HTTP request
+    server.post("/api/todos", todoController::addNewTodo);
     // This catches any uncaught exceptions thrown in the server
     // code and turns them into a 500 response ("Internal Server
     // Error Response"). In general you'll like to *never* actually
