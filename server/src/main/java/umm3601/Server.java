@@ -69,10 +69,9 @@ public class Server {
     // of the HTTP request
     server.post("/api/users", userController::addNewUser);
 
-    server.get("/api/users", todoController::getTodos);
-
+    server.get("/api/todos", todoController::getTodos);
     // Get the specified todoUser
-
+    server.get("/api/todos/{id}", todoController::getTodo);
     // Delete the specified todo
     server.delete("/api/todos/{id}", todoController::deleteTodo);
 
