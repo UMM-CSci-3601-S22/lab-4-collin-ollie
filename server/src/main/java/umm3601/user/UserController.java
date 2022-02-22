@@ -86,7 +86,7 @@ public class UserController {
    */
   public void getUsers(Context ctx) {
 
-    List<Bson> filters = new ArrayList<>();
+    List<Bson> filters = new ArrayList<>(); // start with a blank document
 
     if (ctx.queryParamMap().containsKey(AGE_KEY)) {
         int targetAge = ctx.queryParamAsClass(AGE_KEY, Integer.class).get();

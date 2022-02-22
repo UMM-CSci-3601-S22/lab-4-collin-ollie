@@ -2,13 +2,11 @@ package umm3601.todo;
 
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.regex;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Sorts;
@@ -89,7 +87,7 @@ public class TodoController {
     }
 
     if (ctx.queryParamMap().containsKey(CATEGORY_KEY)) {
-      filters.add(regex(CATEGORY_KEY,  Pattern.quote(ctx.queryParam(CATEGORY_KEY)), "i"));
+      filters.add(eq(CATEGORY_KEY, ctx.queryParam(CATEGORY_KEY)));
     }
 
     if (ctx.queryParamMap().containsKey(OWNER_KEY)) {
