@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Todos } from '../todos';
+import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-todos-profile',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodosProfileComponent implements OnInit {
 
-  constructor() { }
+  todos: Todos;
+  id: string;
+
+  constructor(private route: ActivatedRoute, private todosService: TodosService) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((paramMap) => {
+      this.id = paramMap.get('id');
+      this.todosService.getTodosById(this.id).subscribe(todos => this.todos = todos);
+    });
   }
 
 }
