@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Todos, TodosStatus, TodosSort } from './todos';
-import { TodosService } from './todos.service';
+import { Todo, TodoStatus, TodosSort } from '../todo';
+import { TodosService } from '../todo.service';
 
 @Component({
   selector: 'app-todos-list',
-  templateUrl: './todos-list.component.html',
-  styleUrls: ['./todos-list.component.scss'],
+  templateUrl: './todo-list.component.html',
+  styleUrls: ['./todo-list.component.scss'],
   providers: []
 })
 export class TodosListComponent implements OnInit {
