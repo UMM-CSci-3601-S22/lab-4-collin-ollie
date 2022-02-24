@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Todo, TodoStatus, TodosSort } from '../todo';
-import { TodosService } from '../todo.service';
+import { Subscription } from 'rxjs';
+import { Todos, TodosStatus, TodosSort } from '../todos';
+import { TodosService } from '../todos.service';
 
 @Component({
   selector: 'app-todos-list',
-  templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.scss'],
+  templateUrl: './todos-list.component.html',
+  styleUrls: ['./todos-list.component.scss'],
   providers: []
 })
-export class TodosListComponent implements OnInit {
+export class TodosListComponent implements OnInit, OnDestroy {
 
   public serverFilteredTodos: Todos[];
   public filteredTodos: Todos[];
@@ -22,12 +23,17 @@ export class TodosListComponent implements OnInit {
   public viewType: 'card' | 'list' = 'card';
   public todosLimit: number;
   public todosSort: 'Owner'| 'Body' | 'Category' | 'Status' = 'Status';
+  getTodosSub: Subscription;
+
+
   constructor(private todosService: TodosService, private snackBar: MatSnackBar) { }
 
   getTodosFromServer() {
-    this.todosService.getTodos({
-      status: this.todosStatus, sort: this.todosSort
-    }).subscribe(returnedTodos => {
+    this.unsub();
+    this.getTodosSub = this.todosService.getTodos({
+      status: this.todosStatus
+    })
+    .subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;
       this.updateFilter();
     }, err => {
@@ -39,7 +45,7 @@ export class TodosListComponent implements OnInit {
     });
   }
 
-  public updateFilter() {
+  public updateFilter(): void {
     this.filteredTodos = this.todosService.filterTodos(
       this.serverFilteredTodos, { owner: this.todosOwner, body: this.todosBody, category: this.todosCategory, limit: this.todosLimit }
     );
@@ -47,6 +53,16 @@ export class TodosListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTodosFromServer();
+  }
+
+  ngOnDestroy(): void {
+      this.unsub();
+  }
+
+  unsub(): void {
+    if (this.getTodosSub) {
+      this.getTodosSub.unsubscribe();
+    }
   }
 
 }
