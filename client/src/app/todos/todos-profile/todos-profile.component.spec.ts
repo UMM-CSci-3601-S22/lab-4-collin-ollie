@@ -3,7 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRouteStub } from '../../../testing/activated-route-stub';
-import { MockTodosService } from 'src/testing/todos.service.mock';
+import { MockTodosService } from '../../../testing/todos.service.mock';
 import { Todos } from '../todos';
 import { TodosCardComponent } from '../todos-card/todos-card.component';
 import { TodosProfileComponent } from '../todos-profile/todos-profile.component';

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Todo } from './todo';
+import { Todos, TodosSort, TodosStatus } from './todos';
 
 @Injectable()
 export class TodosService {
+
   readonly todosUrl: string = environment.apiUrl + 'todos';
 
   constructor(private httpClient: HttpClient) { }
@@ -50,5 +51,8 @@ export class TodosService {
     }
 
     return filteredTodos;
+  }
+  addTodos(newTodos: Todos): Observable<string> {
+    return this.httpClient.post<{id: string}>(this.todosUrl, newTodos).pipe(map(res => res.id));
   }
 }
