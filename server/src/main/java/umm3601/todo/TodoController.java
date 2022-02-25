@@ -94,7 +94,8 @@ public class TodoController {
       filters.add(eq(OWNER_KEY, ctx.queryParam(OWNER_KEY)));
     }
     if (ctx.queryParamMap().containsKey(STATUS_KEY)) {
-      filters.add(eq(STATUS_KEY, ctx.queryParam(STATUS_KEY)));
+      Boolean targetStatus = ctx.queryParamAsClass(STATUS_KEY, Boolean.class).get();
+      filters.add(eq(STATUS_KEY, targetStatus));
     }
 
     // Sort the results. Use the `sortby` query param (default "owner")

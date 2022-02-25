@@ -17,7 +17,7 @@ export class TodosService {
       httpParams = httpParams.set('status', filters.status);
     }
     if (filters.sort) {
-      httpParams = httpParams.set('sort', filters.sort);
+      httpParams = httpParams.set('sortby', filters.sort);
     }
     return this.httpClient.get<Todos[]>(this.todosUrl, {
       params: httpParams,
