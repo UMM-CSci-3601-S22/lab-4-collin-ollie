@@ -47,13 +47,13 @@ export class AddTodosComponent implements OnInit {
     this.addTodosForm = this.fb.group({
       category: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.min(2),
-        Validators.max(50),
+        Validators.minLength(2),
+        Validators.maxLength(50),
       ])),
       owner: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.min(2),
-        Validators.max(50),
+        Validators.minLength(2),
+        Validators.maxLength(50),
       ])),
       status: new FormControl('true', Validators.compose([
         Validators.required,
@@ -61,8 +61,8 @@ export class AddTodosComponent implements OnInit {
       ])),
       body: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.min(2),
-        Validators.max(500),
+        Validators.minLength(2),
+        Validators.maxLength(500),
       ])),
 
     });
