@@ -30,7 +30,7 @@ describe('AddTodoComponent', () => {
         RouterTestingModule
       ],
       declarations: [AddTodosComponent],
-      providers: [{ provide: TodosService, useValue: MockTodosService }]
+      providers: [{ provide: TodosService, useValue: new MockTodosService() }]
     })
       .compileComponents().catch(error => {
         expect(error).toBeNull();
@@ -42,6 +42,7 @@ describe('AddTodoComponent', () => {
     addTodosComponent = fixture.componentInstance;
     addTodosComponent.ngOnInit();
     fixture.detectChanges();
+    addTodosForm = addTodosComponent.addTodosForm;
     expect(addTodosForm).toBeDefined();
     expect(addTodosForm.controls).toBeDefined();
   });

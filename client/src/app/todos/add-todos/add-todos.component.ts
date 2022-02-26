@@ -1,4 +1,3 @@
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -77,7 +76,7 @@ export class AddTodosComponent implements OnInit {
 
   submitForm() {
     this.todosService.addTodos(this.addTodosForm.value).subscribe(newID => {
-      this.snackBar.open('Added Todos ' + this.addTodosForm.value.name, null, {
+      this.snackBar.open('Added todo for ' + this.addTodosForm.value.owner , null, {
         duration: 2000,
       });
       this.router.navigate(['/todos/', newID]);
