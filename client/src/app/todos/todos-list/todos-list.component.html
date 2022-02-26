@@ -49,10 +49,10 @@
             <mat-label>Sort: </mat-label>
             <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todosSort" data-test="todosSortSelect" >
               <mat-option>--</mat-option>
-                <mat-option value="Owner">Owner</mat-option>
-                <mat-option value="Body">Body</mat-option>
-                <mat-option value="Category">Category</mat-option>
-                <mat-option value="Status">Status</mat-option>
+                <mat-option value="owner">Owner</mat-option>
+                <mat-option value="body">Body</mat-option>
+                <mat-option value="category">Category</mat-option>
+                <mat-option value="status">Status</mat-option>
               </mat-select>
           </mat-form-field>
           <mat-form-field class="input-field">

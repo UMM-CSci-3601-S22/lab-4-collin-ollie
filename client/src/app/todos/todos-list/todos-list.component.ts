@@ -22,7 +22,7 @@ export class TodosListComponent implements OnInit, OnDestroy {
   public todosCategory: string;
   public viewType: 'card' | 'list' = 'card';
   public todosLimit: number;
-  public todosSort: 'Owner'| 'Body' | 'Category' | 'Status' = 'Status';
+  public todosSort: TodosSort;
   getTodosSub: Subscription;
 
 
@@ -31,7 +31,8 @@ export class TodosListComponent implements OnInit, OnDestroy {
   getTodosFromServer() {
     this.unsub();
     this.getTodosSub = this.todosService.getTodos({
-      status: this.todosStatus
+      status: this.todosStatus,
+      sort: this.todosSort
     })
     .subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;

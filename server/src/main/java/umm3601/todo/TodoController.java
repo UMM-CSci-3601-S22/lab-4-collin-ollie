@@ -101,7 +101,7 @@ public class TodoController {
     // Sort the results. Use the `sortby` query param (default "owner")
     // as the field to sort by, and the query param `sortorder` (default
     // "asc") to specify the sort order.
-    String sortBy = Objects.requireNonNullElse(ctx.queryParam("sortby"), "owner");
+    String sortBy = Objects.requireNonNullElse(ctx.queryParam("sortby"), "category");
     String sortOrder = Objects.requireNonNullElse(ctx.queryParam("sortorder"), "asc");
 
     ctx.json(todoCollection.find(filters.isEmpty() ? new Document() : and(filters))
