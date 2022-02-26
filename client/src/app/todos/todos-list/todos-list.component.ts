@@ -1,7 +1,7 @@
 import { Component,OnDestroy, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
-import { Todos, TodosStatus, TodosSort } from '../todos';
+import { Todos, TodosSort } from '../todos';
 import { TodosService } from '../todos.service';
 
 @Component({
