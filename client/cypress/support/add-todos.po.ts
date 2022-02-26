@@ -15,7 +15,7 @@ export class AddTodosPage {
 
   selectMatSelectValue(select: Cypress.Chainable, value: string) {
     return select.click()
-      .get(`mat-option[value="${value}:"]`).click();
+      .get(`mat-option[value="${value}"]`).click();
   }
 
   getFormField(fieldName: string) {
@@ -27,10 +27,10 @@ export class AddTodosPage {
     this.getFormField('body').type(newTodo.body);
     this.getFormField('category').type(newTodo.category);
     if(newTodo.status) {
-      this.selectMatSelectValue(this.getFormField('status'), 'Complete');
+      this.selectMatSelectValue(this.getFormField('status'), 'true');
     }
     if(!newTodo.status) {
-      this.selectMatSelectValue(this.getFormField('status'), 'Incomplete');
+      this.selectMatSelectValue(this.getFormField('status'), 'false');
     }
     return this.addTodosButton().click();
   }
